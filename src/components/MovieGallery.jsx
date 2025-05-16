@@ -40,7 +40,7 @@ const MovieGallery = () => {
             poster: data.Poster,
           });
 
-          console.log(`🎬 Film trovato (${category}):`, {
+          console.log(`Film trovato (${category}):`, {
             title: data.Title,
             year: data.Year,
             poster: data.Poster,
