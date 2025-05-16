@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 const NetflixGenreButton = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
 
