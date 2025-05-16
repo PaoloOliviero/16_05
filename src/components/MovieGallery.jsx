@@ -36,10 +36,12 @@ const MovieGallery = () => {
         const data = await response.json();
 
         if (data.Response !== "False") {
+          console.log("Film trovato:", data);
           movieData.push(data);
         }
       }
 
+      console.log("Lista finale di film:", movieData);
       setMovies(movieData);
     };
 
