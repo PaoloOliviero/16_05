@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const API_KEY = "996e7de7";
 
-const trendingNow = [
-  "Deadpool & Wolverine",
-  "Mission: Impossible - The Final Reckoning",
-  "Final Destination: Bloodlines",
-  "The Accountant 2",
-  "Sinners",
-  "A Minecraft Movie",
+const lordOfTheRingsSaga = [
+  "The Lord of the Rings: The Fellowship of the Ring",
+  "The Lord of the Rings: The Two Towers",
+  "The Lord of the Rings: The Return of the King",
+  "The Hobbit: An Unexpected Journey",
+  "The Hobbit: The Desolation of Smaug",
+  "The Hobbit: The Battle of the Five Armies",
 ];
 
-const watchItAgain = ["Interstellar", "The Matrix", "Inception", "Titanic", "Gladiator", "Avatar"];
+const missionImpossibleSaga = [
+  "Mission: Impossible",
+  "Mission: Impossible 2",
+  "Mission: Impossible III",
+  "Mission: Impossible - Ghost Protocol",
+  "Mission: Impossible - Rogue Nation",
+  "Mission: Impossible - Fallout",
+];
 
-const newReleases = ["Captain America: Brave New World", "Superman", "Inside Out 2", "The Smurfs", "The Legend of Ochi", "The Shrouds"];
+const rockySaga = ["Rocky", "Rocky II", "Rocky III", "Rocky IV", "Rocky V", "Rocky Balboa"];
 
 const MovieGallery = () => {
-  const [movies, setMovies] = useState({ trending: [], watchAgain: [], newReleases: [] });
+  const [movies, setMovies] = useState({ lordOfTheRings: [], missionImpossible: [], rocky: [] });
 
   useEffect(() => {
     const fetchMovies = async (category, movieList) => {
@@ -28,49 +35,52 @@ const MovieGallery = () => {
         const data = await response.json();
 
         if (data.Response !== "False") {
-          movieData.push(data);
+          movieData.push({
+            imdbID: data.imdbID,
+            poster: data.Poster,
+          });
+
+          console.log(`🎬 Film trovato (${category}):`, {
+            title: data.Title,
+            year: data.Year,
+            poster: data.Poster,
+          });
         }
       }
 
       setMovies((prevMovies) => ({ ...prevMovies, [category]: movieData }));
     };
 
-    fetchMovies("trending", trendingNow);
-    fetchMovies("watchAgain", watchItAgain);
-    fetchMovies("newReleases", newReleases);
+    fetchMovies("lordOfTheRings", lordOfTheRingsSaga);
+    fetchMovies("missionImpossible", missionImpossibleSaga);
+    fetchMovies("rocky", rockySaga);
   }, []);
 
   return (
     <Container>
-      <h2 className="my-4 text-start">Trending Now</h2>
-      <Row className="justify-content-center">
-        {movies.trending.map((movie) => (
-          <Col key={movie.Title} xs={6} sm={4} md={3} lg={2} className="mb-3">
-            <Card className="border-0">
-              <Card.Img variant="top" src={movie.Poster} alt="Film Poster" />
-            </Card>
+      <h2 className="my-4 text-start">The Lord of the Rings + The Hobbit Saga</h2>
+      <Row className="justify-content-center g-3">
+        {movies.lordOfTheRings.map((movie) => (
+          <Col key={movie.imdbID} xs={6} sm={4} md={3} lg={2} className="d-flex justify-content-center">
+            <img src={movie.poster} alt="Movie Poster" className="img-fluid rounded" />
           </Col>
         ))}
       </Row>
 
-      <h2 className="my-4 text-start">Watch It Again</h2>
-      <Row className="justify-content-center">
-        {movies.watchAgain.map((movie) => (
-          <Col key={movie.Title} xs={6} sm={4} md={3} lg={2} className="mb-3">
-            <Card className="border-0">
-              <Card.Img variant="top" src={movie.Poster} alt="Film Poster" />
-            </Card>
+      <h2 className="my-4 text-start">Mission: Impossible Saga</h2>
+      <Row className="justify-content-center g-3">
+        {movies.missionImpossible.map((movie) => (
+          <Col key={movie.imdbID} xs={6} sm={4} md={3} lg={2} className="d-flex justify-content-center">
+            <img src={movie.poster} alt="Movie Poster" className="img-fluid rounded" />
           </Col>
         ))}
       </Row>
 
-      <h2 className="my-4 text-start">New Releases</h2>
-      <Row className="justify-content-center">
-        {movies.newReleases.map((movie) => (
-          <Col key={movie.Title} xs={6} sm={4} md={3} lg={2} className="mb-3">
-            <Card className="border-0">
-              <Card.Img variant="top" src={movie.Poster} alt="Film Poster" />
-            </Card>
+      <h2 className="my-4 text-start">Rocky Saga</h2>
+      <Row className="justify-content-center g-3">
+        {movies.rocky.map((movie) => (
+          <Col key={movie.imdbID} xs={6} sm={4} md={3} lg={2} className="d-flex justify-content-center">
+            <img src={movie.poster} alt="Movie Poster" className="img-fluid rounded" />
           </Col>
         ))}
       </Row>
