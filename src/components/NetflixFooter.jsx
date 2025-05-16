@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const NetflixFooter = () => {
   return (
-    <footer className="bg-dark text-white py-4 w-100% text-center lg">
+    <footer style={{ backgroundColor: "black" }} className="text-white py-4 text-center">
       <Container fluid>
         <Row className="justify-content-center mb-3">
           {["facebook", "instagram", "twitter-x", "youtube"].map((platform) => (

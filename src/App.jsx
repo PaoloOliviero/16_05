@@ -8,7 +8,7 @@ const App = () => {
     <div className="bg-black text-white d-flex flex-column min-vh-100">
       <NetflixNavbar />
 
-      <div className="flex-grow-1 text-white p-4 m-4">
+      <div className="flex-grow-1 text-white p-5 m-4">
         <h1>TV Show</h1>
 
         <MovieGallery />
